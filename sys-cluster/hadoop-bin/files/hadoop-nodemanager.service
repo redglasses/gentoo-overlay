@@ -1,0 +1,12 @@
+[Unit]
+Description=Hadoop Node Manager
+After=network.target
+
+[Service]
+EnvironmentFile=/etc/conf.d/hadoop
+ExecStart=/usr/bin/yarn nodemanager
+User=yarn
+Group=hadoop
+
+[Install]
+WantedBy=multi-user.target

@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit user
+inherit systemd user
 
 DESCRIPTION="Apache Hadoop Common framework"
 HOMEPAGE="http://hadoop.apache.org/"
@@ -21,6 +21,7 @@ DEPEND="
 "
 RDEPEND="
 	${DEPEND}
+	systemd? ( sys-apps/systemd )
 	selinux? ( sec-policy/selinux-hadoop )
 "
 
@@ -50,9 +51,18 @@ src_install() {
 
 	# Install the service specific scripts
 	newinitd "${FILESDIR}/hadoop-namenode" hadoop-namenode
+	newinitd "${FILESDIR}/hadoop-secondarynamenode" hadoop-secondarynamenode
 	newinitd "${FILESDIR}/hadoop-datanode" hadoop-datanode
 	newinitd "${FILESDIR}/hadoop-resourcemanager" hadoop-resourcemanager
 	newinitd "${FILESDIR}/hadoop-nodemanager" hadoop-nodemanager
+
+	if use systemd ; then
+		systemd_dounit "${FILESDIR}"/hadoop-namenode.service
+		systemd_dounit "${FILESDIR}"/hadoop-secondarynamenode.service
+		systemd_dounit "${FILESDIR}"/hadoop-datanode.service
+		systemd_dounit "${FILESDIR}"/hadoop-resourcemanager.service
+		systemd_dounit "${FILESDIR}"/hadoop-nodemanager.service
+	fi
 
 	newconfd "${FILESDIR}/hadoop" hadoop
 }
