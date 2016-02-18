@@ -53,15 +53,15 @@ src_install() {
 	newinitd "${FILESDIR}/hadoop-namenode" hadoop-namenode
 	newinitd "${FILESDIR}/hadoop-secondarynamenode" hadoop-secondarynamenode
 	newinitd "${FILESDIR}/hadoop-datanode" hadoop-datanode
-	newinitd "${FILESDIR}/hadoop-resourcemanager" hadoop-resourcemanager
-	newinitd "${FILESDIR}/hadoop-nodemanager" hadoop-nodemanager
+	newinitd "${FILESDIR}/yarn-resourcemanager" yarn-resourcemanager
+	newinitd "${FILESDIR}/yarn-nodemanager" yarn-nodemanager
 
 	if use systemd ; then
 		systemd_dounit "${FILESDIR}"/hadoop-namenode.service
 		systemd_dounit "${FILESDIR}"/hadoop-secondarynamenode.service
 		systemd_dounit "${FILESDIR}"/hadoop-datanode.service
-		systemd_dounit "${FILESDIR}"/hadoop-resourcemanager.service
-		systemd_dounit "${FILESDIR}"/hadoop-nodemanager.service
+		systemd_dounit "${FILESDIR}"/yarn-resourcemanager.service
+		systemd_dounit "${FILESDIR}"/yarn-nodemanager.service
 	fi
 
 	newconfd "${FILESDIR}/hadoop" hadoop

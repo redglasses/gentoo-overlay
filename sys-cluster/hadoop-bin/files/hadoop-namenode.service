@@ -7,6 +7,7 @@ EnvironmentFile=/etc/conf.d/hadoop
 ExecStart=/usr/bin/hdfs namenode
 User=hdfs
 Group=hadoop
+Restart=on-failure
 
 [Install]
 WantedBy=multi-user.target
