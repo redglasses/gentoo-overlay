@@ -7,8 +7,8 @@ EAPI=6
 inherit git-r3 cmake-utils
 
 
-EGIT_REPO_URI="https://github.com/f1xpl/${PN}.git"
-EGIT_BRANCH="master"
+EGIT_REPO_URI="https://github.com/abraha2d/${PN}.git"
+EGIT_BRANCH="development"
 
 
 DESCRIPTION="Library to build AndroidAuto headunit"
