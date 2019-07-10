@@ -1,0 +1,39 @@
+From 9dc977e70c51d28da523864ad5aea37f8f113941 Mon Sep 17 00:00:00 2001
+From: Kenny Cheng <kenny97821419@gmail.com>
+Date: Thu, 20 Jun 2019 10:26:34 +0800
+Subject: [PATCH] use find_library instead of hard-coded path.
+
+---
+ CMakeLists.txt | 13 ++++++++----
+ 1 file changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/CMakeLists.txt B/CMakeLists.txt
+index fc87b2e..ff050e6 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -40,10 +40,11 @@ endif(WIN32)
+ 
+ if(RPI3_BUILD)
+     add_definitions(-DUSE_OMX -DOMX_SKIP64BIT -DRASPBERRYPI3)
+-    set(BCM_HOST_LIBRARIES "/opt/vc/lib/libbcm_host.so")
+-    set(BCM_HOST_INCLUDE_DIRS "/opt/vc/include")
+-    set(ILCLIENT_INCLUDE_DIRS "/opt/vc/src/hello_pi/libs/ilclient")
+-    set(ILCLIENT_LIBRARIES "/opt/vc/src/hello_pi/libs/ilclient/libilclient.a;/opt/vc/lib/libvcos.so;/opt/vc/lib/libvcilcs.a;/opt/vc/lib/libvchiq_arm.so")
++    find_library(BCM_HOST_LIBRARIES bcm_host)
++    find_library(ILCLIENT_LIBRARIES ilclient)
++    find_library(VCOS_LIBRARIES vcos)
++    find_library(VCILCS_LIBRARIES vcilcs)
++    find_library(VCHIQ_ARM_LIBRARIES vchiq_arm)
+ endif(RPI3_BUILD)
+ 
+ include_directories(${CMAKE_CURRENT_BINARY_DIR}
+@@ -81,6 +82,9 @@ target_link_libraries(autoapp
+                         ${PROTOBUF_LIBRARIES}
+                         ${BCM_HOST_LIBRARIES}
+                         ${ILCLIENT_LIBRARIES}
++			${VCOS_LIBRARIES}
++			${VCILCS_LIBRARIES}
++			${VCHIQ_ARM_LIBRARIES}
+                         ${WINSOCK2_LIBRARIES}
+                         ${RTAUDIO_LIBRARIES}
+                         ${AASDK_PROTO_LIBRARIES}
