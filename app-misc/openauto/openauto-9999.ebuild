@@ -23,7 +23,7 @@ SLOT="0"
 DEPEND="
     dev-libs/aasdk
     dev-qt/qtbluetooth
-	dev-qt/gui[xcb]
+    dev-qt/qtgui[xcb]
     dev-qt/qtmultimedia[gstreamer,widgets]
     dev-qt/qtwidgets
     media-sound/pulseaudio
