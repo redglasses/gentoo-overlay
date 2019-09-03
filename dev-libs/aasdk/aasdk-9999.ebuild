@@ -18,13 +18,14 @@ SRC_URI=""
 
 LICENSE="GPL3"
 KEYWORDS=""
-IUSE=""
+IUSE="libressl"
 SLOT="0"
 
 DEPEND="
     dev-libs/libusb
     dev-libs/protobuf
-    dev-libs/openssl
+    !libressl? ( dev-libs/openssl:0= )
+    libressl? ( dev-libs/libressl:0= )
     dev-libs/boost
     dev-util/cmake
     dev-vcs/git
