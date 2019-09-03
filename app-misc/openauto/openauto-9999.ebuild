@@ -7,8 +7,8 @@ EAPI=6
 inherit git-r3 cmake-utils
 
 
-EGIT_REPO_URI="https://github.com/abraha2d/openauto.git"
-EGIT_BRANCH="development"
+EGIT_REPO_URI="https://github.com/redglasses/openauto.git"
+EGIT_BRANCH="master"
 
 DESCRIPTION="AndroidAuto headunit emulator"
 HOMEPAGE="https://github.com/f1xpl/openauto.git"
