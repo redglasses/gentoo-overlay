@@ -23,7 +23,7 @@ SLOT="0"
 DEPEND="
     dev-libs/aasdk
     dev-qt/qtbluetooth
-    dev-qt/qtgui[xcb]
+    dev-qt/qtgui
     dev-qt/qtmultimedia[gstreamer,widgets]
     dev-qt/qtwidgets
     media-sound/pulseaudio
@@ -37,19 +37,19 @@ src_prepare() {
 src_configure() {
     local mycmakeargs=(
         -DCMAKE_BUILD_TYPE=Release
-		-DBCM_HOST_LIBRARIES="/usr/lib64/libbcm_host.so"
-		-DILCLIENT_LIBRARIES="/usr/lib64/libilclient.a"
-		-DVCOS_LIBRARIES="/usr/lib64/libvcos.so"
-		-DVCILCS_LIBRARIES="/usr/lib/libvcilcs.a"
-		-DVCHIQ_ARM_LIBRARIES="/usr/lib64/libvchiq_arm.so"
         -DAASDK_INCLUDE_DIRS="/usr/include"
         -DAASDK_LIBRARIES="/usr/lib64/libaasdk.so"
         -DAASDK_PROTO_INCLUDE_DIRS="/usr/include"
         -DAASDK_PROTO_LIBRARIES="/usr/lib64/libaasdk_proto.so"
     )
-	if use rpi3 ; then
-	    mycmakeargs="${mycmakeargs} -DRPI3_BUILD"
-	fi
+    if use rpi3 ; then
+        mycmakeargs="${mycmakeargs} -DRPI3_BUILD"
+        mycmakeargs="${mycmakeargs} -DBCM_HOST_LIBRARIES=/usr/lib64/libbcm_host.so"
+        mycmakeargs="${mycmakeargs} -DILCLIENT_LIBRARIES=/usr/lib64/libilclient.a"
+        mycmakeargs="${mycmakeargs} -DVCOS_LIBRARIES=/usr/lib64/libvcos.so"
+        mycmakeargs="${mycmakeargs} -DVCILCS_LIBRARIES=/usr/lib/libvcilcs.a"
+        mycmakeargs="${mycmakeargs} -DVCHIQ_ARM_LIBRARIES=/usr/lib64/libvchiq_arm.so"
+    fi
     cmake-utils_src_configure
 }
 
